@@ -2,6 +2,7 @@ package com.example.pr19_aubovsergey_pr_21102;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.widget.Button;
@@ -16,7 +17,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     TextView timePick;
-    Button btnTime, btnDate;
+    Button btnTime, btnDate, btnDlg;
     Calendar dateTime = Calendar.getInstance();
 
 
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnTime = findViewById(R.id.btnTime);
         btnDate = findViewById(R.id.btnDate);
+        btnDlg = findViewById(R.id.btnDlg);
         timePick = findViewById(R.id.timePick);
 
         btnTime.setOnClickListener(v ->{getTime();});
         btnDate.setOnClickListener(v -> {getDate();});
+        btnDlg.setOnClickListener(v -> {toForDlg();});
 
         setInitialDateTime();
     }
@@ -53,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 dateTime.get(Calendar.HOUR_OF_DAY),
                 dateTime.get(Calendar.MINUTE), true)
                 .show();
+    }
+
+    public void toForDlg(){
+        Intent intent = new Intent(this, ForDlg.class);
+        startActivity(intent);
     }
 
     TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
